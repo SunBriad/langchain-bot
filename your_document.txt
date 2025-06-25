@@ -1,0 +1,63 @@
+这是一个示例文档，用于测试ChromaDB集成。
+文档内容可以包含任何文本信息，例如：
+- AI编程助手的功能介绍
+- LangChain框架的使用示例
+- DeepSeek API的调用方法
+
+您可以将此文件替换为您自己的文档内容。
+
+# ChromaDB 使用方法
+
+## 初始化
+```python
+from langchain.vectorstores import Chroma
+from langchain_openai import OpenAIEmbeddings
+
+# 初始化嵌入模型
+embedding = OpenAIEmbeddings()
+
+# 创建或加载ChromaDB
+vectorstore = Chroma(
+    persist_directory="chroma",  # 持久化目录
+    embedding_function=embedding
+)
+```
+
+## 核心功能
+1. **添加文档**
+```python
+# 添加文本
+vectorstore.add_texts(["文本内容1", "文本内容2"])
+
+# 添加带元数据的文本
+vectorstore.add_texts(
+    texts=["文本内容"],
+    metadatas=[{"source": "文档来源"}]
+)
+```
+
+2. **查询相似文档**
+```python
+# 查询最相似的3个文档
+results = vectorstore.similarity_search("查询文本", k=3)
+
+# 带分数的相似度查询
+results = vectorstore.similarity_search_with_score("查询文本", k=3)
+```
+
+3. **持久化操作**
+```python
+# 手动保存
+vectorstore.persist()
+
+# 删除集合
+vectorstore.delete_collection()
+```
+
+## 高级功能
+- 使用过滤器进行查询
+- 批量添加文档
+- 自定义嵌入维度
+
+您可以根据需要修改或扩展这些示例。
+        
